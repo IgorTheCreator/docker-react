@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      docker:
+        image: docker:latest
+        options: --privileged
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker
+        run: |
+          docker --version
+          docker build -t igorthecreator/docker-react -f Dockerfile.dev .
+
+      - name: Run tests
+        run: |
+          docker run igorthecreator/docker-react npm run test -- --coverage
