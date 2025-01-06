@@ -1,0 +1,13 @@
+stages:
+  - test
+
+services:
+  - docker:latest
+
+before_script:
+  - docker build -t igorthecreator/docker-react -f Dockerfile.dev .
+
+test:
+  stage: test
+  script:
+    - docker run igorthecreator/docker-react npm run test -- --coverage
