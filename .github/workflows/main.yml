@@ -28,4 +28,4 @@ jobs:
 
       - name: Run tests
         run: |
-          docker run igorthecreator/docker-react npm run test -- --coverage
+          docker run igorthecreator/docker-react npm run test -- --watchAll=false
